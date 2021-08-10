@@ -152,6 +152,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-elementui使用中的那些坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/10/elementui%E4%BD%BF%E7%94%A8%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91/">elementui使用中的那些坑</a>
+    </h1>
+  
+
+        
+        <a href="/2021/08/10/elementui%E4%BD%BF%E7%94%A8%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91/" class="archive-article-date">
+  	<time datetime="2021-08-10T08:02:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="此博客来记录一下在日常后台系统开发中使用elementui所遇到的坑"><a href="#此博客来记录一下在日常后台系统开发中使用elementui所遇到的坑" class="headerlink" title="此博客来记录一下在日常后台系统开发中使用elementui所遇到的坑"></a>此博客来记录一下在日常后台系统开发中使用elementui所遇到的坑</h2><hr>
+<ol>
+<li><p>inputNumber计数器</p>
+<p>inputNumber计数器支持范围设定,即最大值:max与最小值:min属性的设置</p>
+<p>有些时候我们希望利用此组件来实现设定阈值的效果,如下图</p>
+<p><img src="../../assets/pics/pic_20210810160939.png" alt="inputNumber使用情景"></p>
+<p>此时的预设效果阈值区间为0-L1-H1-L2-H2-L3-H3-L4-H4</p>
+<p>那么在后台获取到对应的数据字段时,就需要保证H4&gt;L4&gt;H3&gt;L3&gt;H2&gt;L2&gt;H1&gt;L1&gt;0</p>
+<p>如果后台数据的大小顺序与此不相符,那么即使在控制台中打印res相对应的字段也会呈现错误</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/10/elementui%E4%BD%BF%E7%94%A8%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hexo-source-backUp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
