@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2021/08/assets/pics/pic_20210810160939.png">
 <meta property="article:published_time" content="2021-08-10T08:02:21.000Z">
-<meta property="article:modified_time" content="2021-08-10T08:15:59.630Z">
+<meta property="article:modified_time" content="2021-08-16T01:18:54.479Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2021/08/assets/pics/pic_20210810160939.png">
@@ -186,6 +186,12 @@
 <p>那么在后台获取到对应的数据字段时,就需要保证H4&gt;L4&gt;H3&gt;L3&gt;H2&gt;L2&gt;H1&gt;L1&gt;0</p>
 <p>如果后台数据的大小顺序与此不相符,那么即使在控制台中打印res相对应的字段也会呈现错误</p>
 </li>
+<li><p>notification close 方法无法关闭之前的实例</p>
+<h3 id="在数采管理的开发中-需求如下"><a href="#在数采管理的开发中-需求如下" class="headerlink" title="在数采管理的开发中,需求如下:"></a>在数采管理的开发中,需求如下:</h3><p> 后端检测数据变化,当有数据异常到四级阈值的时,就向前台发送数据,前端每拿到一次数据就生成一个notification实例,但如果不自动关闭这些实例就会导致这些实例堆叠过多,所以要实现当有新数据接收到后就清除之前的notification实例并重新生成</p>
+<hr>
+<h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><p>close()方法并非直接调用,而是需要接收对应的参数,其中包含实例的唯一Id值,当我们不知道实例的具体id时,使用如下方案:</p>
+<p> 使用this.$notify.closeAll() 取代 this.$notify.close()</p>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">socket.addEventListener(&#x27;message&#x27;, e =&gt; &#123;</span><br><span class="line">   console.log(e)</span><br><span class="line">   const &#123; data &#125; = e</span><br><span class="line">   let tempArr = data.split(&#x27;,&#x27;)</span><br><span class="line">   this.warningData = &#123;</span><br><span class="line">     boxName: tempArr[0],</span><br><span class="line">     pointName: tempArr[1],</span><br><span class="line">     dataTime: tempArr[2],</span><br><span class="line">     dataValue: tempArr[3],</span><br><span class="line">   &#125;</span><br><span class="line">   if (this.$route.fullPath !== &#x27;/collection/alarm&#x27;) &#123;</span><br><span class="line">     this.$notify.closeAll()</span><br><span class="line">     this.setNotification()</span><br><span class="line">     // this.$nextTick(() =&gt; &#123;</span><br><span class="line">     //   //关闭上次的提醒再执行本次的提醒</span><br><span class="line">     //   this.setNotification()</span><br><span class="line">     // &#125;)</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
